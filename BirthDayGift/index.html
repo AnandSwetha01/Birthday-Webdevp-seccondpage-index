@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Story &bull; Happy Birthday ❤️</title>
+
+    <!-- Google Fonts: Playfair Display (Elegant Serif), Great Vibes (Romantic Script), Poppins (Clean Sans-serif) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:wght@200;300;400;500;600&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Floating Canvas for Heart Particles -->
+    <canvas id="heart-canvas"></canvas>
+
+    <!-- Ambient Music Control -->
+    <button id="music-toggle" class="music-btn" aria-label="Toggle music">
+        <div class="music-icon-wrapper">
+            <svg class="music-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h6V3h-8z" />
+            </svg>
+            <div class="music-waves">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </button>
+    <audio id="bg-music" loop autoplay>
+  <source src="music/lovebgm.mp3" type="audio/mp3">
+</audio>
+    <!-- Interactive Intro Screen -->
+    <section id="intro" class="intro-section">
+        <div class="intro-content">
+            <div class="intro-heart-lottie">❤️</div>
+            <h1 class="intro-title reveal-text"> Pattu kutty 🥰...</h1>
+            <p class="intro-subtitle reveal-text-delay">This love always with you for Endless period 💖</p>
+            <div class="scroll-indicator">
+                <span class="scroll-arrow">&#x2193;</span>
+                <span class="scroll-text">Ulla poga scroll pannu</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Flowing Love Story Container -->
+    <main id="story-path" class="story-container">
+
+        <!-- Header Message (revealed after intro) -->
+        <header class="story-header fade-in-element">
+            <h2 class="vintage-heading">Our LoveJourney</h2>
+            <p class="story-description">Namma serndhu vaazhndha azhagaana moments... For my Love...
+            </p>
+        </header>
+
+        <!-- Gallery Staggered/Zig-Zag Cards -->
+        <div class="cards-wrapper">
+
+            <!-- Card 1 (Left Aligned) -->
+            <div class="story-card card-left fade-in-element" data-speed="0.04">
+                <!-- Design element overlay - PLACED BEHIND IN DOM -->
+                <img class="card-bg-decoration glow-effect" src="design%20elements/2152c682fcfd049f1b651bdaa229d3b7.png"
+                    alt="design accent">
+
+                <div class="card-glass-frame">
+                    <!-- Corner flower image overlay -->
+                    <img class="card-corner-flower flower-top-left" src="design%20elements/3f2b0486d0c76deb6745af895126ef30%20(1).png" alt="corner flower overlay">
+                    <div class="card-img-container">
+                        <img class="card-image-main" src="main%20image/IMG_20260404_215426609_PORTRAIT.jpg"
+                            alt="Special Moment">
+                        <!-- Floating Cartoon Badge - Smaller & subtle -->
+                        <div class="cartoon-badge float-cartoon" style="animation-delay: 0s;">
+                            <img src="cartoon%20image/img.jpeg" alt="cute couple sketch">
+                        </div>
+                    </div>
+                    <div class="card-caption">
+                        <span class="card-date">CuteBeat</span>
+                        <h3>Indha moment romba special 💭</h3>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interstitial Quote 1 -->
+            <div class="story-quote fade-in-element">
+                <p class="cursive-quote">"always Be Bold & Strong..."</p>
+            </div>
+
+            <!-- Card 2 (Right Aligned) -->
+            <div class="story-card card-right fade-in-element" data-speed="-0.03">
+                <!-- Design element overlay - PLACED BEHIND IN DOM -->
+                <img class="card-bg-decoration glow-effect" src="design%20elements/25ddd95db8bdd7fd137ce4cc4871d809.png"
+                    alt="design accent">
+
+                <div class="card-glass-frame">
+                    <!-- Corner flower image overlay -->
+                    <img class="card-corner-flower flower-top-right" src="design%20elements/592204c0ae4fba736ce546be893ad4f7.png" alt="corner flower overlay">
+                    <div class="card-img-container">
+                        <img class="card-image-main" src="main%20image/IMG_20260405_034130479.jpg" alt="Smile Moment">
+                        <!-- Floating Cartoon Badge - Smaller & subtle -->
+                        <div class="cartoon-badge float-cartoon" style="animation-delay: 0.5s;">
+                            <img src="cartoon%20image/ime2.jpeg" alt="cute character">
+                        </div>
+                    </div>
+                    <div class="card-caption">
+                        <span class="card-date">ToughMove</span>
+                        <h3>I am always with you as a Lovable Solu 😍</h3>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 3 (Left Aligned) -->
+            <div class="story-card card-left fade-in-element" data-speed="0.06">
+                <!-- Design element overlay - PLACED BEHIND IN DOM -->
+                <img class="card-bg-decoration glow-effect" src="design%20elements/3218dd5b07c4b496f5e677ca9754394e.png"
+                    alt="design accent">
+
+                <div class="card-glass-frame">
+                    <!-- Corner flower image overlay -->
+                    <img class="card-corner-flower flower-bottom-left" src="design%20elements/b7366f3eb1bb09f9c1a4755c5b0e9b3f.png" alt="corner flower overlay">
+                    <div class="card-img-container">
+                        <img class="card-image-main" src="main%20image/IMG_20260222_124701_228.jpg"
+                            alt="Priceless Memories">
+                        <!-- Floating Cartoon Badge - Smaller & subtle -->
+                        <div class="cartoon-badge float-cartoon" style="animation-delay: 1s;">
+                            <img src="cartoon%20image/img3.jpeg" alt="cute sketch">
+                        </div>
+                    </div>
+                    <div class="card-caption">
+                        <span class="card-date">Moment III</span>
+                        <h3>My cute LovelySoul 💕</h3>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interstitial Quote 2 -->
+            <div class="story-quote fade-in-element">
+                <p class="cursive-quote">"Un kooda irukura ovvoru naalum 💕..."</p>
+            </div>
+
+            <!-- Card 4 (Right Aligned) -->
+            <div class="story-card card-right fade-in-element" data-speed="-0.04">
+                <!-- Design element overlay - PLACED BEHIND IN DOM -->
+                <img class="card-bg-decoration glow-effect"
+                    src="design%20elements/46b278bd2338e5413c5b98c7c8980c49%20(1).png" alt="design accent">
+
+                <div class="card-glass-frame">
+                    <!-- Corner flower image overlay -->
+                    <img class="card-corner-flower flower-top-left" src="design%20elements/64b49ccec2861e6f37a0c2f79b43bc3b.png" alt="corner flower overlay">
+                    <div class="card-img-container">
+                        <img class="card-image-main" src="main%20image/IMG_20260222_124710_584.jpg" alt="Togetherness">
+                        <!-- Floating Cartoon Badge - Smaller & subtle -->
+                        <div class="cartoon-badge float-cartoon" style="animation-delay: 1.5s;">
+                            <img src="cartoon%20image/Screenshot%202026-08-09%20125109.png" alt="cute heart doodle">
+                        </div>
+                    </div>
+                    <div class="card-caption">
+                        <span class="card-date">Moment </span>
+                        <h3>En Idhayam Unakaga ✨</h3>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Silent Gallery Header -->
+        <section class="silent-header fade-in-element">
+            <p class="silent-tagline">Varthaiye Illamal...</p>
+            <h2 class="silent-title">CuteMemo</h2>
+            <div class="silent-divider"></div>
+        </section>
+
+        <!-- Silent Gallery Section (NO TEXT, ONLY IMAGES) -->
+        <section id="silent-gallery" class="silent-gallery-container fade-in-element">
+
+            <div class="silent-item item-offset-1">
+                <div class="silent-frame">
+                    <!-- Design element decoration behind the image -->
+                    <img class="silent-bg-decoration" src="design%20elements/Photoroom_20250727_151704%20(1).PNG"
+                        alt="background accent">
+                    <!-- Corner flower image overlay -->
+                    <img class="card-corner-flower flower-bottom-right" src="design%20elements/a3ccce5e71b04979974a554c63727fff.png" alt="corner flower overlay">
+                    <img class="silent-image" src="main%20image/IMG_20260222_124703_675.jpg" alt="Silent memory">
+                </div>
+            </div>
+
+            <div class="silent-item item-offset-2">
+                <div class="silent-frame">
+                    <img class="silent-bg-decoration" src="design%20elements/592204c0ae4fba736ce546be893ad4f7.png"
+                        alt="background accent">
+                    <!-- Corner flower image overlay -->
+                    <img class="card-corner-flower flower-top-left" src="design%20elements/87540d19ebc70d28efc3fb15785daee6.png" alt="corner flower overlay">
+                    <img class="silent-image" src="main%20image/IMG_20260222_124726_270.jpg" alt="Silent memory">
+                </div>
+            </div>
+
+            <div class="silent-item item-offset-1">
+                <div class="silent-frame">
+                    <img class="silent-bg-decoration" src="design%20elements/a3ccce5e71b04979974a554c63727fff.png"
+                        alt="background accent">
+                    <!-- Corner flower image overlay -->
+                    <img class="card-corner-flower flower-bottom-left" src="design%20elements/90a5ae8691dd735534fe6a19bcc6751f.png" alt="corner flower overlay">
+                    <img class="silent-image" src="main%20image/IMG_20260413_135626.png" alt="Silent memory">
+                </div>
+            </div>
+
+            <div class="silent-item item-offset-2">
+                <div class="silent-frame">
+                    <img class="silent-bg-decoration" src="design%20elements/87540d19ebc70d28efc3fb15785daee6.png"
+                        alt="background accent">
+                    <!-- Corner flower image overlay -->
+                    <img class="card-corner-flower flower-top-right" src="design%20elements/3218dd5b07c4b496f5e677ca9754394e.png" alt="corner flower overlay">
+                    <img class="silent-image" src="main%20image/Screenshot_20260710-092432.Instagram.png"
+                        alt="Silent memory">
+                </div>
+            </div>
+
+            <div class="silent-item item-offset-1">
+                <div class="silent-frame">
+                    <img class="silent-bg-decoration" src="design%20elements/90a5ae8691dd735534fe6a19bcc6751f.png"
+                        alt="background accent">
+                    <!-- Corner flower image overlay -->
+                    <img class="card-corner-flower flower-top-left" src="design%20elements/25ddd95db8bdd7fd137ce4cc4871d809.png" alt="corner flower overlay">
+                    <img class="silent-image" src="main%20image/IMG-20251130-WA0003.jpg" alt="Silent memory">
+                </div>
+            </div>
+
+            <div class="silent-item item-offset-2">
+                <div class="silent-frame">
+                    <img class="silent-bg-decoration" src="design%20elements/a4763776b467dd7de21d44404baa3179.png"
+                        alt="background accent">
+                    <!-- Corner flower image overlay -->
+                    <img class="card-corner-flower flower-bottom-right" src="design%20elements/2152c682fcfd049f1b651bdaa229d3b7.png" alt="corner flower overlay">
+                    <img class="silent-image" src="main%20image/IMG_20260222_124701_228.jpg" alt="Silent memory">
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Big Love Message Section -->
+        <section class="love-message-section fade-in-element">
+            <div class="message-glow-container">
+                <p class="sparkle-title">En Idhayam Unakaga</p>
+                <h2 class="heartfelt-text">
+                    "Nee vandhadhum life romba azhaga maariduchu ❤️<br>
+                    Un kooda irundha dhaan anatha naal fullfill aagudhu 💖"
+                </h2>
+                <div class="ending-heart">💝</div>
+            </div>
+       </section>
+
+<section id="video-gallery" class="video-gallery-container fade-in-element">
+
+    <div class="video-item">
+        <div class="video-frame">
+            <video class="story-video" playsinline preload="metadata">
+                <source src="videos/Balag%20editz%20%5B5BCF606%5D.mp4" type="video/mp4">
+            </video>
+            <button class="video-play-btn" aria-label="Play video">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M8 5v14l11-7z" />
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <div class="video-item">
+        <div class="video-frame">
+            <video class="story-video" playsinline preload="metadata">
+                <source src="videos/BM-SwathaAnandh%23Editz.mp4" type="video/mp4">
+            </video>
+            <button class="video-play-btn" aria-label="Play video">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M8 5v14l11-7z" />
+                </svg>
+            </button>
+        </div>
+    </div>
+
+</section>
+
+        <!-- Outro Birthday Section -->
+        <section id="outro" class="outro-section fade-in-element">
+            <div class="outro-glow-circle"></div>
+            <div class="outro-content">
+                <h2 class="birthday-title glowing-text">Happy Birthday</h2>
+                <h3 class="birthday-name"> Swetha latha  ❤️</h3>
+                <p class="outro-wish">Indha naalum un vaazhkkaiyum romba azhagaaga amaiya en vazhthukal!</p>
+                <div class="ending-heart">💖</div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Spotify Scan Code (Floating widget bottom-right) -->
+    <div id="spotify-widget" class="spotify-badge">
+        <img src="design%20elements/spotify.png" alt="Spotify Code">
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
