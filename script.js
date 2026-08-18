@@ -178,133 +178,112 @@ document.addEventListener('DOMContentLoaded', () => {
       storyContainer.scrollIntoView({ behavior: 'smooth' });
     });
   }
+// ==========================================
+// 5. Video Gallery - Play in Fullscreen
+// ==========================================
+const videoItems = document.querySelectorAll('.video-item');
 
-  // ==========================================
-  // 5. Video Gallery - Play in Fullscreen
-  // ==========================================
-  const videoItems = document.querySelectorAll('.video-item');
-
-  function requestVideoFullscreen(el) {
-    if (el.requestFullscreen) return el.requestFullscreen();
-    if (el.webkitRequestFullscreen) return el.webkitRequestFullscreen(); // Safari
-    if (el.webkitEnterFullscreen) return el.webkitEnterFullscreen(); // iOS Safari (video element only)
-    if (el.msRequestFullscreen) return el.msRequestFullscreen();
+function requestVideoFullscreen(video) {
+  if (video.requestFullscreen) {
+    return video.requestFullscreen();
   }
 
-  videoItems.forEach(item => {
-    const video = item.querySelector('.story-video');
-    const playBtn = item.querySelector('.video-play-btn');
+  if (video.webkitRequestFullscreen) {
+    return video.webkitRequestFullscreen();
+  }
 
-    // Pause every other video when one starts playing
-    function pauseOthers() {
-      videoItems.forEach(other => {
-        if (other !== item) {
-          const otherVideo = other.querySelector('.story-video');
+  if (video.webkitEnterFullscreen) {
+    return video.webkitEnterFullscreen();
+  }
+
+  return Promise.resolve();
+}
+
+videoItems.forEach(item => {
+  const video = item.querySelector('.story-video');
+  const playBtn = item.querySelector('.video-play-btn');
+
+  if (!video || !playBtn) return;
+
+  // Pause all other videos
+  function pauseOthers() {
+    videoItems.forEach(otherItem => {
+      if (otherItem !== item) {
+        const otherVideo = otherItem.querySelector('.story-video');
+
+        if (otherVideo) {
           otherVideo.pause();
-          other.classList.remove('is-playing');
+          otherItem.classList.remove('is-playing');
         }
-      });
-    }
-
-    function startPlayback() {
-      pauseOthers();
-      item.classList.add('is-playing');
-      // On iOS, fullscreen must be requested directly on the video element itself
-      requestVideoFullscreen(video);
-      video.play();
-    }
-
-    playBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      startPlayback();
-    });
-
-    video.addEventListener('click', startPlayback);
-
-    video.addEventListener('pause', () => {
-      item.classList.remove('is-playing');
-    });
-
-    video.addEventListener('ended', () => {
-      item.classList.remove('is-playing');
-    });
-
-    // When user exits fullscreen, pause the video too
-    document.addEventListener('fullscreenchange', () => {
-      if (!document.fullscreenElement && !video.paused) {
-        video.pause();
       }
     });
+  }
+
+  // Play video
+  async function startPlayback(e) {
+    if (e) e.stopPropagation();
+
+    pauseOthers();
+
+    try {
+      // First play the video
+      await video.play();
+
+      item.classList.add('is-playing');
+
+      // Then open fullscreen
+      try {
+        await requestVideoFullscreen(video);
+      } catch (fullscreenError) {
+        console.log('Fullscreen not available:', fullscreenError);
+      }
+
+    } catch (error) {
+      console.error('Video playback failed:', error);
+
+      // If Drive blocks direct playback
+      alert('Video could not be played. Please check the Google Drive sharing permission.');
+    }
+  }
+
+  // Play button
+  playBtn.addEventListener('click', startPlayback);
+
+  // Clicking video
+  video.addEventListener('click', () => {
+    if (video.paused) {
+      startPlayback();
+    } else {
+      video.pause();
+    }
   });
 
-  // ==========================================
-  // 6. Audio Play / Pause with Fade
-  // ==========================================
-  const musicToggle = document.getElementById('music-toggle');
-  const bgMusic = document.getElementById('bg-music');
-  let isPlaying = false;
-  let fadeInterval = null;
+  // When paused
+  video.addEventListener('pause', () => {
+    item.classList.remove('is-playing');
+  });
 
-  function fadeAudioIn(audio, duration = 1500) {
-    audio.volume = 0;
-    audio.play();
-    const intervalTime = 50;
-    const steps = duration / intervalTime;
-    const targetVolume = 0.5; // Sweet spot volume
-    const volumeStep = targetVolume / steps;
+  // When playing
+  video.addEventListener('play', () => {
+    item.classList.add('is-playing');
+  });
 
-    clearInterval(fadeInterval);
-    fadeInterval = setInterval(() => {
-      if (audio.volume < targetVolume) {
-        audio.volume = Math.min(targetVolume, audio.volume + volumeStep);
-      } else {
-        clearInterval(fadeInterval);
-      }
-    }, intervalTime);
-  }
+  // When video ends
+  video.addEventListener('ended', () => {
+    item.classList.remove('is-playing');
+  });
 
-  function fadeAudioOut(audio, duration = 1000) {
-    const intervalTime = 50;
-    const steps = duration / intervalTime;
-    const volumeStep = audio.volume / steps;
+  // When fullscreen exits
+  document.addEventListener('fullscreenchange', () => {
+    if (!document.fullscreenElement && !video.paused) {
+      video.pause();
+    }
+  });
 
-    clearInterval(fadeInterval);
-    fadeInterval = setInterval(() => {
-      if (audio.volume > 0.02) {
-        audio.volume = Math.max(0, audio.volume - volumeStep);
-      } else {
-        audio.pause();
-        audio.volume = 0;
-        clearInterval(fadeInterval);
-      }
-    }, intervalTime);
-  }
-
-  if (musicToggle && bgMusic) {
-    // Explicit click to trigger audio
-    musicToggle.addEventListener('click', () => {
-      if (isPlaying) {
-        fadeAudioOut(bgMusic);
-        musicToggle.classList.remove('music-playing');
-      } else {
-        fadeAudioIn(bgMusic);
-        musicToggle.classList.add('music-playing');
-      }
-      isPlaying = !isPlaying;
-    });
-
-    // Suggestive prompt: play audio when user clicks anywhere on the intro screen
-    // (helps capture interaction for autoplay approval)
-    const handleFirstInteraction = () => {
-      if (!isPlaying) {
-        fadeAudioIn(bgMusic);
-        musicToggle.classList.add('music-playing');
-        isPlaying = true;
-      }
-      document.removeEventListener('click', handleFirstInteraction);
-    };
-
-    // Only hook first-click audio if it wasn't started
-    document.addEventListener('click', handleFirstInteraction);
-  }
+  // Safari fullscreen exit
+  document.addEventListener('webkitfullscreenchange', () => {
+    if (!document.webkitFullscreenElement && !video.paused) {
+      video.pause();
+    }
+  });
 });
